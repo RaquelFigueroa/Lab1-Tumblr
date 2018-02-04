@@ -7,7 +7,7 @@ target 'Tumblr' do
 
   # Pods for Tumblr
 
-  pod 'Alamofire', '~> 4.4'
+  pod 'AlamofireImage', '~> 3.3'
 
   target 'TumblrTests' do
     inherit! :search_paths
