@@ -15,14 +15,23 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     var posts: [[String: Any]] = []
     
     @IBOutlet weak var imageView: UITableView!
+    var refreshControl: UIRefreshControl!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(PhotosViewController.didPullToRefresh(_:)), for: .valueChanged)
+        
+        imageView.insertSubview(refreshControl, at: 0)
         imageView.dataSource = self
+        
         fetchImages()
-
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        fetchImages()
     }
 
     func fetchImages(){
@@ -46,6 +55,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
                 
                 // TODO: Reload the table view
                 self.imageView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         task.resume()
@@ -72,7 +82,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
             cell.photoImageView.af_setImage(withURL: url)
         }
 
-        
         return cell
     }
     
