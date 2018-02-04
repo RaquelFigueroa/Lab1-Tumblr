@@ -43,11 +43,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
                 // TODO: Get the posts and store in posts property
                 let posts = responseDictionary["posts"] as! [[String: Any]]
                 self.posts = posts
-
-                
-
-                //let photoURL =
-                //print (self.posts)
                 
                 // TODO: Reload the table view
                 self.imageView.reloadData()
@@ -63,13 +58,23 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = imageView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! PhotoCell
 
-        let imageURL = URL(string: "https://78.media.tumblr.com/a2f23071e45e327326a2b84994719ffb/tumblr_p3g83tzRjp1qggwnvo1_500.jpg")!
-        cell.photoImageView.af_setImage(withURL: imageURL)
+        let post = posts[indexPath.row]
+
+        if let photos = post["photos"] as? [[String: Any]] {
+            // photos is NOT nil, we can use it!
+            let photo = photos[0]
+            let originalSize = photo["original_size"] as! [String: Any]
+            let urlString = originalSize["url"] as! String
+            let url = URL(string: urlString)!
+            
+            print(url)
+            // TODO: Get the photo url
+            cell.photoImageView.af_setImage(withURL: url)
+        }
+
         
         return cell
     }
-    
-    
     
     
     
