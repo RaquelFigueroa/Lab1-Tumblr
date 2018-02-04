@@ -1,6 +1,6 @@
 # Lab 1 - *Tumblr*
 
-**Tumble** is a photo browsing app using the [The Tumblr API](https://www.tumblr.com/docs/en/api/v2#posts).
+**Tumblr** is a photo browsing app using the [The Tumblr API](https://www.tumblr.com/docs/en/api/v2#posts).
 
 Time spent: **5** hours spent in total
 
@@ -30,7 +30,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/RaquelFigueroa/Lab1-Tumblr/blob/master/images/Lab1-Tumblr-Demo.gif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
