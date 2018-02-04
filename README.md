@@ -2,13 +2,13 @@
 
 **Tumble** is a photo browsing app using the [The Tumblr API](https://www.tumblr.com/docs/en/api/v2#posts).
 
-Time spent: **10** hours spent in total
+Time spent: **5** hours spent in total
 
 ## User Stories
 
 The following **required** user stories are complete:
 
-- [ ] User can scroll through a feed of images returned from the Tumblr API (5pts)
+- [x] User can scroll through a feed of images returned from the Tumblr API (5pts)
 
 The following **optional** user stories are implemented:
 
@@ -19,11 +19,11 @@ The following **optional** user stories are implemented:
 
 The following **additional** user stories are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality! (+1-3pts)
+- [x] User can "Pull to refresh" the image list
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
+1. It was very helpful to first do the assignment, then use the skills learned to do the lab. Rushing to do the lab first was a misconception my class believed would help with the team work of this week's curriculum.
 2.
 
 ## Video Walkthrough
@@ -36,11 +36,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I would sometimes lose a link between the image layout feature and the code. I became acutely aware of how important it is to maintain links between the layout and code.
 
 ## License
 
-    Copyright 2018 [name of copyright owner]
+    Copyright 2018 CSUMB
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
