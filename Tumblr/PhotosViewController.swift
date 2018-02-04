@@ -18,6 +18,11 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     var refreshControl: UIRefreshControl!
     
     
+
+
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +40,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     }
 
     func fetchImages(){
+
+        
+        
+        
         let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
         
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -44,6 +53,26 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print(error.localizedDescription)
+                if (error.localizedDescription == "The Internet connection appears to be offline."){
+                        //alert functionality:
+                        let alertController = UIAlertController(title: "Network Connection Failure", message: "The Internet connection appears to be offline. Would you like to reload?", preferredStyle: .alert)
+                    
+                        let cancelAction = UIAlertAction(title: "Cancel: Exit App", style: .cancel) { (action) in
+                            print("this is cancelAction")
+                            exit(0)
+                        }
+                    
+                        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                            self.fetchImages()
+                        }
+                    
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(okAction)
+                    
+                        self.present(alertController, animated: true){
+                        print("success!")
+                    }
+                }
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 
@@ -76,8 +105,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
             let originalSize = photo["original_size"] as! [String: Any]
             let urlString = originalSize["url"] as! String
             let url = URL(string: urlString)!
-            
-            print(url)
+
             // TODO: Get the photo url
             cell.photoImageView.af_setImage(withURL: url)
         }
@@ -85,13 +113,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-
 }
