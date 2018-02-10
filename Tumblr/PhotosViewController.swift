@@ -17,12 +17,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var imageView: UITableView!
     var refreshControl: UIRefreshControl!
     
-    
-
-
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +64,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
                         alertController.addAction(okAction)
                     
                         self.present(alertController, animated: true){
-                        print("success!")
                     }
                 }
             } else if let data = data,
@@ -102,15 +95,24 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
         if let photos = post["photos"] as? [[String: Any]] {
             // photos is NOT nil, we can use it!
             let photo = photos[0]
+//            print (photo)
             let originalSize = photo["original_size"] as! [String: Any]
             let urlString = originalSize["url"] as! String
             let url = URL(string: urlString)!
-
             // TODO: Get the photo url
             cell.photoImageView.af_setImage(withURL: url)
         }
 
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = imageView.indexPath(for: cell) {
+            let post = posts[indexPath.row]
+            let vc = segue.destination as! PhotoDetailsViewController
+            vc.photoDetail = post
+        }
     }
     
     override func didReceiveMemoryWarning() {
