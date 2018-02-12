@@ -60,7 +60,7 @@ I would sometimes lose a link between the image layout feature and the code. I b
 
 **Tumblr** is a photo browsing app app using the [The Tumblr API](https://www.tumblr.com/docs/en/api/v2#posts).
 
-Time spent: **3** hours spent in total
+Time spent: **5** hours spent in total
 
 ## User Stories
 
@@ -70,7 +70,7 @@ The following **required** user stories are complete:
 
 The following **stretch** user stories are implemented:
 
-- [ ] Add Avatar and Publish Dates (+2pt)
+- [x] Add Avatar and Publish Dates (+2pt)
 - [ ] Zoomable Photo View (+2pt)
 - [ ] Infinite Scrolling (+2pt)
 
@@ -80,8 +80,8 @@ The following **additional** user stories are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. I would very much learn how to detect if a link between a story board item and a swift file has been lost.
+2. I would also like to learn more about common Swift syntax norms.
 
 ## Video Walkthrough
 
@@ -93,11 +93,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Configuring the date format properly was definitely a challenge for this lab project. There are so many formatting options!
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright 2018 R. Figueroa
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

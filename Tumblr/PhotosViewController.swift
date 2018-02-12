@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class PhotosViewController: UIViewController, UITableViewDataSource {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //property to store posts:
     var posts: [[String: Any]] = []
@@ -26,6 +26,9 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
         imageView.insertSubview(refreshControl, at: 0)
         imageView.dataSource = self
         
+        imageView.delegate = self
+        
+        
         fetchImages()
     }
     
@@ -34,10 +37,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     }
 
     func fetchImages(){
-
-        
-        
-        
         let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
         
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -52,7 +51,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
                         let alertController = UIAlertController(title: "Network Connection Failure", message: "The Internet connection appears to be offline. Would you like to reload?", preferredStyle: .alert)
                     
                         let cancelAction = UIAlertAction(title: "Cancel: Exit App", style: .cancel) { (action) in
-                            print("this is cancelAction")
                             exit(0)
                         }
                     
@@ -84,35 +82,78 @@ class PhotosViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = imageView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! PhotoCell
 
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
 
         if let photos = post["photos"] as? [[String: Any]] {
             // photos is NOT nil, we can use it!
             let photo = photos[0]
-//            print (photo)
             let originalSize = photo["original_size"] as! [String: Any]
             let urlString = originalSize["url"] as! String
             let url = URL(string: urlString)!
-            // TODO: Get the photo url
-            cell.photoImageView.af_setImage(withURL: url)
-        }
 
+            cell.photoImageView.af_setImage(withURL: url)
+            
+//            cell.photoDateLabel.text = "date"
+        }
+        
         return cell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         if let indexPath = imageView.indexPath(for: cell) {
-            let post = posts[indexPath.row]
+            let post = posts[indexPath.section]
             let vc = segue.destination as! PhotoDetailsViewController
             vc.photoDetail = post
         }
+    }
+    
+    //header view:
+    func numberOfSections(in imageView: UITableView) -> Int {
+        return posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        
+        let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+        profileView.clipsToBounds = true
+        profileView.layer.cornerRadius = 15;
+        profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).cgColor
+        profileView.layer.borderWidth = 1;
+        
+        let post = posts[section]
+        
+        // Set the avatar
+        profileView.af_setImage(withURL: URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")!)
+        headerView.addSubview(profileView)
+        
+        let label = UILabel(frame: CGRect(x: 50, y: 10, width: 250, height: 30))
+        let date = post["date"] as! String
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss 'GMT'"
+        let newDate = formatter.date(from: date)
+
+        formatter.dateFormat = "MMMM d, yyyy h:mm a"
+        let dateStr = formatter.string(from: newDate!)
+
+        label.text = dateStr
+
+        headerView.addSubview(label)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
     
     override func didReceiveMemoryWarning() {
