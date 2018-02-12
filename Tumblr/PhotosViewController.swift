@@ -121,7 +121,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        headerView.backgroundColor = UIColor(white: 1, alpha: 0.5)
         
         let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
         profileView.clipsToBounds = true

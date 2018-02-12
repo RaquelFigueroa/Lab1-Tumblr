@@ -90,6 +90,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UPO-3y-iv6">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.10131772418139548" green="0.10328637283143184" blue="0.42292746113989643" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" red="1" green="0.3046403139300532" blue="0.27401546986281744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="2"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
